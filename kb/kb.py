@@ -38,7 +38,6 @@ class KB(object):
         return False
 
     def query(self, q):
-        payload = {'query': "select * where {     <http://dbpedia.org/resource/India>   <http://dbpedia.org/ontology/capital>   ?v0.  }", 'format': 'application/json'}
         sparql = SPARQLWrapper("http://dbpedia.org/sparql")
         results = None
         sparql.setQuery(q)
