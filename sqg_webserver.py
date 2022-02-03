@@ -61,6 +61,7 @@ def generate_query():
         uris = [Uri(uri["uri"], kb.parse_uri, uri["confidence"]) for uri in item["uris"]]
         entities.append(LinkedItem(item["surface"], uris))
 
+
     relations = []
     for item in raw_relations:
         uris = [Uri(uri["uri"], kb.parse_uri, uri["confidence"]) for uri in item["uris"]]
@@ -119,7 +120,7 @@ if __name__ == '__main__':
     utility.setup_logging()
 
     parser = argparse.ArgumentParser(description='Generate SPARQL query')
-    parser.add_argument("--port", help="port", default=5000, type=int, dest="port")
+    parser.add_argument("--port", help="port", default=5010, type=int, dest="port")
     parser.add_argument("--kb", help="'dbpedia' (default) or 'freebase'", default="dbpedia", dest="kb")
     parser.add_argument("--classifier", help="'svm' (default) or 'naivebayes'", default="svm", dest="classifier")
     args = parser.parse_args()

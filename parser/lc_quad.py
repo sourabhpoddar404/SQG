@@ -5,8 +5,9 @@ from kb.dbpedia import DBpedia
 from parser.answerparser import AnswerParser
 
 
+
 class LC_Qaud:
-    def __init__(self, path="./data/LC-QUAD/data_v8.json"):
+    def __init__(self, path="/home/SQG/data/LC-QUAD/data_v8.json"):
         self.raw_data = []
         self.qapairs = []
         self.path = path

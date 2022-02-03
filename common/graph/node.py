@@ -17,7 +17,8 @@ class Node:
         self.mergable = mergable
         self.inbound = []
         self.outbound = []
-        self.__confidence = np.prod([uri.confidence for uri in self.__uris])
+        temp = self.__uris
+        self.__confidence = np.prod([int(uri.confidence) for uri in temp])
 
     @property
     def confidence(self):

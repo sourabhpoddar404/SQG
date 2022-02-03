@@ -3,6 +3,7 @@ from multiprocessing import Pool
 from contextlib import closing
 import json
 import requests
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 def query(args):
@@ -37,13 +38,21 @@ class KB(object):
         return False
 
     def query(self, q):
-        payload = {'query': q, 'format': 'application/json'}
+        payload = {'query': "select * where {     <http://dbpedia.org/resource/India>   <http://dbpedia.org/ontology/capital>   ?v0.  }", 'format': 'application/json'}
+        sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+        results = None
+        sparql.setQuery(q)
         try:
-            r = requests.post(self.endpoint, payload)
-        except:
+            sparql.setReturnFormat(JSON)
+            results = sparql.query()
+
+            #print(results.convert())
+            #r = requests.post(self.endpoint, payload)
+        except Exception as e:
+            print(e)
             return 0, None
 
-        return r.status_code, r.json() if r.status_code == 200 else None
+        return results.response.code, results.convert() if results.response.code == 200 else None
 
     def sparql_query(self, clauses, return_vars="*", count=False, ask=False):
         if isinstance(clauses, list):
