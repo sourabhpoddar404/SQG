@@ -38,7 +38,7 @@ class KB(object):
         return False
 
     def query(self, q):
-        sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+        sparql = SPARQLWrapper(self.endpoint)
         results = None
         sparql.setQuery(q)
         try:
